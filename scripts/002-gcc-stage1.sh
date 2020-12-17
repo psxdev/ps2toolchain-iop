@@ -2,19 +2,14 @@
 # gcc-3.2.3-stage1.sh by AKuHAK
 # Based on gcc-3.2.2-stage1.sh by Naomi Peori (naomi@peori.ca)
 
-GCC_VERSION=3.2.3
 ## Download the source code.
-SOURCE=http://ftpmirror.gnu.org/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2
-wget --continue $SOURCE || { exit 1; }
-
-## Unpack the source code.
-echo Decompressing GCC $GCC_VERSION. Please wait.
-rm -Rf gcc-$GCC_VERSION && tar xfj gcc-$GCC_VERSION.tar.bz2 || { exit 1; }
-
-## Enter the source directory and patch the source code.
-cd gcc-$GCC_VERSION || { exit 1; }
-if [ -e ../../patches/gcc-$GCC_VERSION-PS2.patch ]; then
-	cat ../../patches/gcc-$GCC_VERSION-PS2.patch | patch -p1 || { exit 1; }
+REPO_URL="https://github.com/fjtrujy/gcc.git"
+REPO_FOLDER="gcc"
+BRANCH_NAME="iop-v3.2.3"
+if test ! -d "$REPO_FOLDER"; then
+	git clone --depth 1 -b $BRANCH_NAME $REPO_URL && cd $REPO_FOLDER || exit 1
+else
+	cd $REPO_FOLDER && git fetch origin && git reset --hard origin/${BRANCH_NAME} || exit 1
 fi
 
 OSVER=$(uname)
