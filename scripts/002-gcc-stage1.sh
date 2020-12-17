@@ -5,7 +5,7 @@
 ## Download the source code.
 REPO_URL="https://github.com/fjtrujy/gcc.git"
 REPO_FOLDER="gcc"
-BRANCH_NAME="iop-v3.2.3"
+BRANCH_NAME="iop-v9.2.0"
 if test ! -d "$REPO_FOLDER"; then
 	git clone --depth 1 -b $BRANCH_NAME $REPO_URL && cd $REPO_FOLDER || exit 1
 else
