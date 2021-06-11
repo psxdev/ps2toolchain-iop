@@ -44,6 +44,6 @@ rm -rf build-$TARGET && mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 
 ## Compile and install.
 make --quiet -j $PROC_NR clean   || { exit 1; }
-make --quiet -j $PROC_NR CFLAGS="$CFLAGS -D_FORTIFY_SOURCE=0 -O2 -Wno-implicit-function-declaration" || { exit 1; }
+make --quiet -j $PROC_NR CFLAGS="$CFLAGS -D_FORTIFY_SOURCE=0 -O2 -Wno-error -Wno-implicit-function-declaration" || { exit 1; }
 make --quiet -j $PROC_NR install || { exit 1; }
 make --quiet -j $PROC_NR clean   || { exit 1; }
