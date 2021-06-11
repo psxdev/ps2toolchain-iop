@@ -41,7 +41,6 @@ rm -rf build-$TARGET-stage1 && mkdir build-$TARGET-stage1 && cd build-$TARGET-st
   --prefix="$PS2DEV/$TARGET_ALIAS" \
   --target="$TARGET" \
   --enable-languages="c" \
-  --with-float=hard \
   --with-headers=no \
   --without-newlib \
   --without-cloog \
