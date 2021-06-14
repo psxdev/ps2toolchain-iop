@@ -4,7 +4,7 @@
 ## Download the source code.
 REPO_URL="https://github.com/fjtrujy/binutils-gdb.git"
 REPO_FOLDER="binutils-gdb"
-BRANCH_NAME="iop-v2.25-branch"
+BRANCH_NAME="iop-v2.26.1"
 if test ! -d "$REPO_FOLDER"; then
 	git clone --depth 1 -b $BRANCH_NAME $REPO_URL && cd $REPO_FOLDER || exit 1
 else
