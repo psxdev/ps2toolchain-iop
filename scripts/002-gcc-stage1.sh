@@ -2,9 +2,9 @@
 # 002-gcc-stage1.sh by Francisco Javier Trujillo Mata (fjtrujy@gmail.com)
 
 ## Download the source code.
-REPO_URL="https://github.com/fjtrujy/gcc.git"
+REPO_URL="https://github.com/psxdev/gcc.git"
 REPO_FOLDER="gcc"
-BRANCH_NAME="iop-v11.1.0"
+BRANCH_NAME="iop-v11.1.0-arm"
 if test ! -d "$REPO_FOLDER"; then
 	git clone --depth 1 -b $BRANCH_NAME $REPO_URL && cd $REPO_FOLDER || exit 1
 else
@@ -16,9 +16,17 @@ TARGET="mipsel-ps2-irx"
 TARG_XTRA_OPTS=""
 OSVER=$(uname)
 
-## Apple needs to pretend to be linux
 if [ ${OSVER:0:6} == Darwin ]; then
-	TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu"
+	TARG_XTRA_OPTS="--without-build-config"
+  #for macports
+  CFLAGS=-I/opt/local/include;export CFLAGS
+  CPPFLAGS=-I/opt/local/include;export CPPFLAGS
+  LDFLAGS=-L/opt/local/lib;export LDFLAGS
+  #different build tools
+  #CC='/usr/bin/clang -arch arm64';export CC
+  #CC=arm64-apple-darwin20-gcc-11.1.0;export CC
+  #CXX='/usr/bin/clang++ -arch arm64';export CXX
+  #CXX=arm64-apple-darwin20-g++-mp-11;export CXX
 elif [ ${OSVER:0:10} == MINGW64_NT ]; then
 	export lt_cv_sys_max_cmd_len=8000
 	export CC=x86_64-w64-mingw32-gcc
